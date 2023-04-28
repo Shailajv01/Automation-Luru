@@ -43,7 +43,41 @@ public class CreateTaskTest extends BaseLuruAutomationTest {
 		logger.info("Ending of initLuruSiteLogin method");
 	}
 
-	
+	@Test(priority = 1, description = "Verify User Can Create Task")
+	@Description("Test Description: Verify User Can Create Task")
+	@Severity(SeverityLevel.BLOCKER)
+	@Story("Verify User Can Create Task")
+	public void testCreateTask() {
+		logger.info("Startitng of testCreateTask method");
+
+		try {
+
+			createTaskPage.clickOnTaskTab();
+			createTaskPage.clickOnCreateTaskButton();
+
+			// Assertion for Create Task
+			Assert.assertEquals(createTaskPage.getCreateTaskTiltle(),
+					expectedAssertionsProp.getProperty("text.create.task"));
+
+			createTaskPage.setTitle(testDataProp.getProperty("text.title"));
+			createTaskPage.clickOnLinkToCrmIcon();
+			createTaskPage.clickOnLead();
+			createTaskPage.searchCrmRecord(testDataProp.getProperty("search.lead.name"));
+			createTaskPage.clickOnSelectedLeadName();
+			createTaskPage.setDescription(testDataProp.getProperty("text.task.description"));
+			createTaskPage.clickOnCreateButton();
+
+			// Assertion for Task Created Successfully message
+			Assert.assertEquals(createTaskPage.getTaskCreatedMessage(),
+					expectedAssertionsProp.getProperty("text.task.created.successfully"));
+
+		} catch (Exception e) {
+			Assert.fail("Exception occured while creating task  : " + e.getMessage());
+			logger.error("Error occured while creating task  ", e);
+		}
+
+		logger.info("Ending of testCreateTask method");
+	}
 
 	@Test(priority = 2, description = "Verify Task Marked Completed")
 	@Description("Test Description: Verify Task Marked Completed ")
