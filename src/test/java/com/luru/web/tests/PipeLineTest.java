@@ -142,6 +142,7 @@ public class PipeLineTest extends BaseLuruAutomationTest {
 		} catch (Exception e) {
 			Assert.fail("Exception occured while updating Lead pipeline: " + e.getMessage());
 			logger.error("Error occured while updating Lead pipeline  ", e);
+		
 		}
 
 		logger.info("Ending of testUpdateLeadPipeline method");
