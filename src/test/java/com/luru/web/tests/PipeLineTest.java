@@ -122,6 +122,31 @@ public class PipeLineTest extends BaseLuruAutomationTest {
 
 		logger.info("Ending of testUpdateLeadPipeline method");
 	}
+	
+	@Test(priority = 4, description = "Verify User Can Update Lead Pipeline")
+	@Description("Test Description:Verify User Can Update Lead Pipeline")
+	@Severity(SeverityLevel.BLOCKER)
+	@Story("Verify User Can Update Lead Pipeline")
+	public void testUpdateLeadPipeline2() {
+		logger.info("Startitng of testUpdateLeadPipeline method");
+
+		try {
+
+			this.pipelinePage.updateLead();
+			this.pipelinePage.editLastNameInUpdateScreen(testDataProp.getProperty("edit.pipeline.last.names"));
+			this.pipelinePage.clickOnUpdateButton();
+
+			// Assertion for Created lead successfully message title
+			Assert.assertTrue(pipelinePage.getUpdatedLeadMessage(testDataProp.getProperty("company.name")));
+
+		} catch (Exception e) {
+			Assert.fail("Exception occured while updating Lead pipeline: " + e.getMessage());
+			logger.error("Error occured while updating Lead pipeline  ", e);
+		
+		}
+
+		logger.info("Ending of testUpdateLeadPipeline method");
+	}
 
 	@AfterClass
 	public void quitDriver() {
